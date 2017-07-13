@@ -150,6 +150,11 @@ public final class ConnectionPool {
     assert (Thread.holdsLock(this));
     if (!cleanupRunning) {
       cleanupRunning = true;
+      System.out.println("==================================\n"
+                         + ((ThreadPoolExecutor) executor).getActiveCount() + " + "
+                         + ((ThreadPoolExecutor) executor).getPoolSize() + " + "
+                         + ((ThreadPoolExecutor) executor).getTaskCount() + " + "
+                         + ((ThreadPoolExecutor) executor).getCompletedTaskCount());
       executor.execute(cleanupRunnable);
     }
     connections.add(connection);
